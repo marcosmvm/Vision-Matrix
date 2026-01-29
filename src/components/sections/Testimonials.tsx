@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import FadeIn from "@/components/animations/FadeIn";
 import { testimonials } from "@/lib/data";
 
@@ -31,24 +31,21 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="py-24 bg-black relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[var(--accent)]/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[var(--accent)]/5 rounded-full blur-3xl" />
-      </div>
-
+    <section className="py-24 bg-[#0f1119] relative overflow-hidden">
       <div className="max-w-5xl mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
           <FadeIn>
-            <span className="text-[var(--accent)] text-sm font-semibold tracking-wider uppercase">
+            <span className="text-[var(--accent)] text-sm font-semibold tracking-[0.3em] uppercase mb-4 block">
               Testimonials
             </span>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <h2 className="text-3xl md:text-5xl font-bold text-white mt-4">
-              What Our Clients Say
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
+              <span className="text-gradient-blue">TRUSTED BY LIVE EVENT</span>
+            </h2>
+            <h2 className="text-3xl md:text-5xl font-bold">
+              <span className="text-gradient-blue">PROFESSIONALS WORLDWIDE</span>
             </h2>
           </FadeIn>
         </div>
@@ -64,66 +61,40 @@ export default function Testimonials() {
               transition={{ duration: 0.5 }}
               className="text-center"
             >
-              {/* Quote Icon */}
-              <div className="flex justify-center mb-8">
-                <div className="w-16 h-16 rounded-full bg-[var(--accent)]/10 flex items-center justify-center">
-                  <Quote size={32} className="text-[var(--accent)]" />
-                </div>
-              </div>
-
               {/* Quote Text */}
-              <blockquote className="text-xl md:text-2xl lg:text-3xl text-white font-light leading-relaxed mb-8">
+              <blockquote className="text-lg md:text-xl lg:text-2xl text-white/90 leading-relaxed mb-8 max-w-4xl mx-auto">
                 &ldquo;{testimonials[current].quote}&rdquo;
               </blockquote>
 
               {/* Author */}
               <div>
-                <p className="text-white font-semibold text-lg">
+                <p className="text-[var(--accent)] font-bold text-lg uppercase tracking-wider">
                   {testimonials[current].author}
                 </p>
-                <p className="text-[var(--foreground-muted)]">
+                <p className="text-[var(--foreground-muted)] text-sm">
                   {testimonials[current].title}, {testimonials[current].company}
                 </p>
               </div>
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigation */}
-          <div className="flex justify-center items-center gap-6 mt-12">
-            <button
-              onClick={prev}
-              className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors"
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeft size={20} />
-            </button>
-
-            {/* Dots */}
-            <div className="flex gap-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    setIsAutoPlaying(false);
-                    setCurrent(index);
-                  }}
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                    index === current
-                      ? "bg-[var(--accent)] w-8"
-                      : "bg-white/20 hover:bg-white/40"
-                  }`}
-                  aria-label={`Go to testimonial ${index + 1}`}
-                />
-              ))}
-            </div>
-
-            <button
-              onClick={next}
-              className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors"
-              aria-label="Next testimonial"
-            >
-              <ChevronRight size={20} />
-            </button>
+          {/* Navigation Dots */}
+          <div className="flex justify-center items-center gap-3 mt-12">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setIsAutoPlaying(false);
+                  setCurrent(index);
+                }}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === current
+                    ? "bg-[var(--accent)]"
+                    : "bg-white/20 hover:bg-white/40"
+                }`}
+                aria-label={`Go to testimonial ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
       </div>

@@ -1,19 +1,23 @@
 import Hero from "@/components/sections/Hero";
+import ClientLogos from "@/components/sections/ClientLogos";
+import CustomSolutions from "@/components/sections/CustomSolutions";
+import WhoWeAre from "@/components/sections/WhoWeAre";
 import Services from "@/components/sections/Services";
-import Portfolio from "@/components/sections/Portfolio";
-import Stats from "@/components/sections/Stats";
 import Testimonials from "@/components/sections/Testimonials";
-import CTA from "@/components/sections/CTA";
+import FeaturedEvents from "@/components/sections/FeaturedEvents";
+import ContactForm from "@/components/sections/ContactForm";
 
 export default function Home() {
   return (
     <>
       <Hero />
+      <ClientLogos />
+      <CustomSolutions />
+      <WhoWeAre />
       <Services />
-      <Portfolio limit={3} showFilters={false} showViewAll={true} />
-      <Stats />
       <Testimonials />
-      <CTA />
+      <FeaturedEvents />
+      <ContactForm />
     </>
   );
 }

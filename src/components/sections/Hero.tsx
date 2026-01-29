@@ -1,90 +1,63 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, Play } from "lucide-react";
-import Button from "@/components/ui/Button";
-import VideoBackground from "@/components/ui/VideoBackground";
-import TextReveal from "@/components/animations/TextReveal";
 import { siteConfig } from "@/lib/data";
 
 export default function Hero() {
-  const scrollToContent = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: "smooth",
-    });
-  };
-
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Video Background - Using a placeholder video URL */}
-      <VideoBackground
-        src="https://cdn.pixabay.com/video/2020/05/25/40130-424930953_large.mp4"
-        poster="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1920"
-        showControls
-      />
-
-      {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-6"
-        >
-          <span className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium text-white/90">
-            Premium Event Production
-          </span>
-        </motion.div>
-
-        <TextReveal
-          text={siteConfig.tagline}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold text-white justify-center mb-6"
-          delay={0.4}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0f]">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-20">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)`,
+            backgroundSize: "40px 40px",
+          }}
         />
+      </div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10"
-        >
-          From concept to execution, we create extraordinary experiences that
-          captivate audiences and elevate your brand.
-        </motion.p>
-
+      {/* VM Watermark */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="text-[40vw] font-black leading-none tracking-tighter"
+          style={{
+            background: "linear-gradient(180deg, rgba(79, 172, 254, 0.08) 0%, rgba(0, 242, 254, 0.03) 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
         >
-          <Button href="/contact" variant="primary" size="lg">
-            Start Your Project
-          </Button>
-          <Button href="/portfolio" variant="outline" size="lg">
-            <Play size={18} className="mr-2" />
-            View Our Work
-          </Button>
+          VM
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.button
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        onClick={scrollToContent}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/60 hover:text-white transition-colors"
-        aria-label="Scroll down"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
+      {/* Content */}
+      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center pt-20">
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 tracking-tight"
         >
-          <ArrowDown size={28} />
-        </motion.div>
-      </motion.button>
+          {siteConfig.tagline.toUpperCase()}
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="text-lg md:text-xl lg:text-2xl text-white/80 font-medium tracking-widest uppercase"
+        >
+          {siteConfig.subtitle}
+        </motion.p>
+      </div>
+
+      {/* Gradient Fade at Bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0a0f] to-transparent" />
     </section>
   );
 }

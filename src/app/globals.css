@@ -1,21 +1,34 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000;
-  --background-secondary: #111111;
+  /* Dark navy background - matching original site */
+  --background: #0a0a0f;
+  --background-secondary: #0f1119;
+  --background-card: #141824;
+
+  /* Text colors */
   --foreground: #ffffff;
-  --foreground-muted: #9CA3AF;
-  --accent: #D4AF37;
-  --accent-hover: #F4CF47;
+  --foreground-muted: #a0a8b8;
+
+  /* Cyan/teal accent - matching VM logo */
+  --accent: #00d4ff;
+  --accent-secondary: #0099cc;
+  --accent-dark: #006699;
+
+  /* Blue gradient colors for sections */
+  --blue-gradient-start: #1a237e;
+  --blue-gradient-mid: #283593;
+  --blue-gradient-end: #3949ab;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-background-secondary: var(--background-secondary);
+  --color-background-card: var(--background-card);
   --color-foreground: var(--foreground);
   --color-foreground-muted: var(--foreground-muted);
   --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
+  --color-accent-secondary: var(--accent-secondary);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -55,30 +68,36 @@ body {
   background: var(--foreground-muted);
 }
 
-/* Video background utilities */
-.video-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
-
-/* Gradient overlays */
-.gradient-overlay {
+/* Blue gradient section */
+.blue-gradient-section {
   background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.7) 0%,
-    rgba(0, 0, 0, 0.5) 50%,
-    rgba(0, 0, 0, 0.8) 100%
+    135deg,
+    #1a237e 0%,
+    #283593 50%,
+    #3949ab 100%
   );
 }
 
-/* Text gradient effect */
+/* Service card gradient */
+.service-card-gradient {
+  background: linear-gradient(
+    180deg,
+    rgba(30, 64, 175, 0.9) 0%,
+    rgba(37, 99, 235, 0.8) 100%
+  );
+}
+
+/* Text gradient - cyan */
 .text-gradient {
-  background: linear-gradient(135deg, var(--foreground) 0%, var(--accent) 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Text gradient - blue to cyan */
+.text-gradient-blue {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -86,7 +105,69 @@ body {
 
 /* Glass effect */
 .glass {
-  background: rgba(17, 17, 17, 0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(15, 17, 25, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Client logo marquee */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Hero watermark */
+.hero-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(200px, 40vw, 500px);
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.03);
+  letter-spacing: -0.05em;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* Gradient border button */
+.gradient-border {
+  position: relative;
+  background: transparent;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  border-radius: inherit;
+  z-index: -1;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  padding: 2px;
+}
+
+/* Section divider line */
+.section-divider {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+  margin: 0 auto;
 }

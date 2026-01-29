@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { navLinks, siteConfig } from "@/lib/data";
+import { navLinks } from "@/lib/data";
+import Logo from "@/components/ui/Logo";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,40 +28,35 @@ export default function Navbar() {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-black/90 backdrop-blur-md py-4"
-            : "bg-transparent py-6"
+            ? "bg-[#0a0a0f]/95 backdrop-blur-md py-3"
+            : "bg-transparent py-4"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="group">
-            <motion.span
-              className="text-xl font-bold tracking-tight"
-              whileHover={{ scale: 1.02 }}
-            >
-              <span className="text-white">VISION</span>
-              <span className="text-[var(--accent)]"> MATRIX</span>
-            </motion.span>
-          </Link>
+          <Logo size="sm" />
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="relative text-sm font-medium text-white/80 hover:text-white transition-colors group"
-              >
-                {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[var(--accent)] transition-all duration-300 group-hover:w-full" />
-              </Link>
-            ))}
-            <Link
-              href="/contact"
-              className="px-5 py-2.5 bg-[var(--accent)] text-black font-medium text-sm rounded hover:bg-[var(--accent-hover)] transition-colors"
-            >
-              Get Started
-            </Link>
+          <div className="hidden md:flex items-center gap-10">
+            {navLinks.map((link) =>
+              link.isButton ? (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="px-6 py-2.5 bg-transparent border-2 border-white text-white font-semibold text-sm uppercase tracking-wider rounded-sm hover:bg-white hover:text-[#0a0a0f] transition-all duration-300"
+                >
+                  {link.name}
+                </Link>
+              ) : (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="relative text-sm font-semibold text-white uppercase tracking-wider hover:text-[var(--accent)] transition-colors"
+                >
+                  {link.name}
+                </Link>
+              )
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -82,7 +78,7 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "tween", duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-black md:hidden"
+            className="fixed inset-0 z-40 bg-[#0a0a0f] md:hidden"
           >
             <div className="flex flex-col items-center justify-center h-full gap-8">
               {navLinks.map((link, index) => (
@@ -92,28 +88,25 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <Link
-                    href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-2xl font-medium text-white hover:text-[var(--accent)] transition-colors"
-                  >
-                    {link.name}
-                  </Link>
+                  {link.isButton ? (
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="px-8 py-3 bg-transparent border-2 border-white text-white font-semibold uppercase tracking-wider rounded-sm hover:bg-white hover:text-[#0a0a0f] transition-all"
+                    >
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="text-2xl font-semibold text-white uppercase tracking-wider hover:text-[var(--accent)] transition-colors"
+                    >
+                      {link.name}
+                    </Link>
+                  )}
                 </motion.div>
               ))}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: navLinks.length * 0.1 }}
-              >
-                <Link
-                  href="/contact"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="px-8 py-3 bg-[var(--accent)] text-black font-medium rounded hover:bg-[var(--accent-hover)] transition-colors"
-                >
-                  Get Started
-                </Link>
-              </motion.div>
             </div>
           </motion.div>
         )}
