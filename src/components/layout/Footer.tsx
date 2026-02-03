@@ -14,9 +14,9 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-[#0a0a0f]">
+    <footer className="bg-background">
       {/* Top CTA Section */}
-      <div className="border-t border-white/10 py-16">
+      <div className="border-t border-white/10 py-20">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <p className="text-white/80 text-lg tracking-wider uppercase mb-6">
             Event Production Services Worldwide

@@ -16,7 +16,7 @@ export default function EventGalleryPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-[#0a0a0f]">
+      <section className="pt-32 pb-16 bg-background">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <FadeIn>
             <span className="text-[var(--accent)] text-sm font-semibold tracking-[0.3em] uppercase mb-4 block">
@@ -38,7 +38,7 @@ export default function EventGalleryPage() {
       </section>
 
       {/* Gallery Section */}
-      <section className="py-16 bg-[#0f1119]">
+      <section className="py-24 bg-background-secondary">
         <div className="max-w-7xl mx-auto px-6">
           {/* Category Filters */}
           <FadeIn delay={0.3}>

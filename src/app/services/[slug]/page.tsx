@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Calendar, Speaker, Palette, Video, CheckCircle, ArrowLeft } from "lucide-react";
 import FadeIn from "@/components/animations/FadeIn";
 import Button from "@/components/ui/Button";
@@ -54,7 +55,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-black">
+      <section className="pt-32 pb-20 bg-background">
         <div className="max-w-7xl mx-auto px-6">
           <FadeIn>
             <Link
@@ -92,11 +93,15 @@ export default async function ServicePage({ params }: ServicePageProps) {
               </FadeIn>
             </div>
             <FadeIn delay={0.3} direction="left">
-              <div className="relative aspect-square rounded-xl overflow-hidden bg-[var(--background-secondary)]">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  {Icon && <Icon size={200} className="text-[var(--accent)]/10" />}
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent)]/5 to-transparent" />
+              <div className="relative aspect-square rounded-xl overflow-hidden">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
               </div>
             </FadeIn>
           </div>
@@ -137,7 +142,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
       </section>
 
       {/* Other Services */}
-      <section className="py-24 bg-black">
+      <section className="py-24 bg-background">
         <div className="max-w-7xl mx-auto px-6">
           <FadeIn>
             <h2 className="text-3xl font-bold text-white mb-12">

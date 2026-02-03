@@ -5,7 +5,7 @@ import { siteConfig } from "@/lib/data";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0f]">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[var(--background)]">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-20">
         <div
@@ -36,12 +36,12 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center pt-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center pt-20">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 tracking-tight"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight max-w-5xl mx-auto"
         >
           {siteConfig.tagline.toUpperCase()}
         </motion.h1>
@@ -50,14 +50,14 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-lg md:text-xl lg:text-2xl text-white/80 font-medium tracking-widest uppercase"
+          className="text-lg md:text-xl lg:text-2xl text-white/80 font-medium tracking-widest uppercase max-w-3xl mx-auto"
         >
           {siteConfig.subtitle}
         </motion.p>
       </div>
 
       {/* Gradient Fade at Bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0a0f] to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 }

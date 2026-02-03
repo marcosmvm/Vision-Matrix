@@ -31,8 +31,8 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="py-24 bg-[#0f1119] relative overflow-hidden">
-      <div className="max-w-5xl mx-auto px-6 relative z-10">
+    <section className="py-24 bg-background-secondary relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
           <FadeIn>

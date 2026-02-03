@@ -39,7 +39,7 @@ function CountUp({ value, duration = 2 }: { value: string; duration?: number }) 
 
 export default function Stats() {
   return (
-    <section className="py-20 bg-[var(--accent)]">
+    <section className="py-20 bg-gradient-to-r from-accent/10 via-accent/5 to-accent/10 border-y border-accent/20">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
@@ -51,10 +51,10 @@ export default function Stats() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="text-center"
             >
-              <div className="text-4xl md:text-5xl font-bold text-black mb-2">
+              <div className="text-4xl md:text-5xl font-bold text-accent mb-2">
                 <CountUp value={stat.value} />
               </div>
-              <div className="text-black/70 font-medium">{stat.label}</div>
+              <div className="text-white/70 font-medium">{stat.label}</div>
             </motion.div>
           ))}
         </div>

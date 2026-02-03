@@ -12,7 +12,7 @@ export default function PortfolioPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-8 bg-black">
+      <section className="pt-32 pb-8 bg-background">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <FadeIn>
             <span className="text-[var(--accent)] text-sm font-semibold tracking-wider uppercase">

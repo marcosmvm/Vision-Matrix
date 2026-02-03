@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Calendar, Speaker, Palette, Video, ArrowRight, CheckCircle } from "lucide-react";
 import FadeIn from "@/components/animations/FadeIn";
 import StaggerContainer, { StaggerItem } from "@/components/animations/StaggerContainer";
@@ -22,7 +23,7 @@ export default function ServicesPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-black">
+      <section className="pt-32 pb-20 bg-background">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <FadeIn>
             <span className="text-[var(--accent)] text-sm font-semibold tracking-wider uppercase">
@@ -92,19 +93,18 @@ export default function ServicesPage() {
                       </Link>
                     </div>
                     <div
-                      className={`relative aspect-[4/3] rounded-xl overflow-hidden bg-black ${
+                      className={`relative aspect-[4/3] rounded-xl overflow-hidden ${
                         !isEven ? "lg:order-1" : ""
                       }`}
                     >
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        {Icon && (
-                          <Icon
-                            size={120}
-                            className="text-[var(--accent)]/10"
-                          />
-                        )}
-                      </div>
-                      <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent)]/5 to-transparent" />
+                      <Image
+                        src={service.image}
+                        alt={service.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[var(--background-secondary)]/80 to-transparent" />
                     </div>
                   </div>
                 </FadeIn>

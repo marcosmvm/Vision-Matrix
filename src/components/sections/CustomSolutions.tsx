@@ -17,7 +17,7 @@ export default function CustomSolutions() {
         />
       </div>
 
-      <div className="w-full max-w-4xl mx-auto px-6 relative z-10">
+      <div className="w-full max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center">
           <FadeIn>
             <span className="text-white/80 text-sm font-semibold tracking-[0.3em] uppercase mb-6 inline-block">
@@ -26,7 +26,7 @@ export default function CustomSolutions() {
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight max-w-4xl mx-auto">
               WHERE CREATIVITY MEETS
               <br />
               FLAWLESS EXECUTION

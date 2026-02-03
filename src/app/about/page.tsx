@@ -57,7 +57,7 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-black">
+      <section className="pt-32 pb-20 bg-background">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -107,7 +107,7 @@ export default function AboutPage() {
       <Stats />
 
       {/* Our Values */}
-      <section className="py-24 bg-black">
+      <section className="py-24 bg-background">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <FadeIn>
@@ -125,7 +125,7 @@ export default function AboutPage() {
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value) => (
               <StaggerItem key={value.title}>
-                <div className="p-8 bg-[var(--background-secondary)] rounded-xl border border-white/5 h-full">
+                <div className="p-8 bg-[var(--background-secondary)] rounded-xl border border-white/5 h-full hover:border-[var(--accent)]/20 transition-all duration-300">
                   <div className="w-12 h-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
                     <div className="w-3 h-3 rounded-full bg-[var(--accent)]" />
                   </div>

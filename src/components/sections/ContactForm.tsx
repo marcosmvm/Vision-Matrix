@@ -33,12 +33,12 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="py-24 bg-[#0a0a0f]">
-      <div className="max-w-4xl mx-auto px-6">
+    <section className="py-24 bg-background">
+      <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12">
           <FadeIn>
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 max-w-4xl mx-auto">
               LET&apos;S MAKE YOUR VISION A REALITY
             </h2>
           </FadeIn>
@@ -56,7 +56,7 @@ export default function ContactForm() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-16 bg-[#0f1119] rounded-lg border border-white/10"
+              className="text-center py-16 bg-background-secondary rounded-lg border border-white/10 max-w-4xl mx-auto"
             >
               <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-6">
                 <CheckCircle size={32} className="text-green-500" />
@@ -85,7 +85,7 @@ export default function ContactForm() {
               </button>
             </motion.div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl mx-auto">
               {/* Name Row */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
@@ -96,7 +96,7 @@ export default function ContactForm() {
                     value={formState.firstName}
                     onChange={handleChange}
                     placeholder="First Name *"
-                    className="w-full px-4 py-4 bg-transparent border-b border-white/20 text-white placeholder-white/40 focus:outline-none focus:border-[var(--accent)] transition-colors"
+                    className="w-full px-4 py-3 bg-background-secondary border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-accent transition-colors"
                   />
                 </div>
                 <div>
@@ -107,7 +107,7 @@ export default function ContactForm() {
                     value={formState.lastName}
                     onChange={handleChange}
                     placeholder="Last Name *"
-                    className="w-full px-4 py-4 bg-transparent border-b border-white/20 text-white placeholder-white/40 focus:outline-none focus:border-[var(--accent)] transition-colors"
+                    className="w-full px-4 py-3 bg-background-secondary border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-accent transition-colors"
                   />
                 </div>
               </div>
@@ -122,7 +122,7 @@ export default function ContactForm() {
                     value={formState.email}
                     onChange={handleChange}
                     placeholder="Email *"
-                    className="w-full px-4 py-4 bg-transparent border-b border-white/20 text-white placeholder-white/40 focus:outline-none focus:border-[var(--accent)] transition-colors"
+                    className="w-full px-4 py-3 bg-background-secondary border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-accent transition-colors"
                   />
                 </div>
                 <div>
@@ -133,7 +133,7 @@ export default function ContactForm() {
                     value={formState.company}
                     onChange={handleChange}
                     placeholder="Company *"
-                    className="w-full px-4 py-4 bg-transparent border-b border-white/20 text-white placeholder-white/40 focus:outline-none focus:border-[var(--accent)] transition-colors"
+                    className="w-full px-4 py-3 bg-background-secondary border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-accent transition-colors"
                   />
                 </div>
               </div>
@@ -146,7 +146,7 @@ export default function ContactForm() {
                   value={formState.phone}
                   onChange={handleChange}
                   placeholder="Phone (Optional)"
-                  className="w-full px-4 py-4 bg-transparent border-b border-white/20 text-white placeholder-white/40 focus:outline-none focus:border-[var(--accent)] transition-colors"
+                  className="w-full px-4 py-3 bg-background-secondary border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-accent transition-colors"
                 />
               </div>
 
@@ -159,7 +159,7 @@ export default function ContactForm() {
                   value={formState.message}
                   onChange={handleChange}
                   placeholder="Tell us about your vision... *"
-                  className="w-full px-4 py-4 bg-transparent border-b border-white/20 text-white placeholder-white/40 focus:outline-none focus:border-[var(--accent)] transition-colors resize-none"
+                  className="w-full px-4 py-3 bg-background-secondary border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-accent transition-colors resize-none leading-relaxed"
                 />
               </div>
 
@@ -168,7 +168,7 @@ export default function ContactForm() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-12 py-4 bg-[var(--accent)] text-black font-semibold uppercase tracking-wider hover:bg-[var(--accent)]/90 transition-colors disabled:opacity-50"
+                  className="px-12 py-4 bg-accent text-black font-semibold uppercase tracking-wider hover:bg-accent-secondary transition-colors disabled:opacity-50 rounded-lg"
                 >
                   {isSubmitting ? (
                     <span className="flex items-center gap-2">

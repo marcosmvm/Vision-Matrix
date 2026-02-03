@@ -6,7 +6,7 @@ import FadeIn from "@/components/animations/FadeIn";
 
 export default function WhoWeAre() {
   return (
-    <section className="py-24 bg-[#0a0a0f]">
+    <section className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Text Content */}
