@@ -12,6 +12,7 @@
 
   /* Cyan/teal accent - matching VM logo */
   --accent: #00d4ff;
+  --accent-hover: #00bfe6;
   --accent-secondary: #0099cc;
   --accent-dark: #006699;
 
