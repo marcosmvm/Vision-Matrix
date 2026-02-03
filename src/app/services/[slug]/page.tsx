@@ -2,55 +2,45 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Calendar, Speaker, Palette, Video, CheckCircle, ArrowLeft } from "lucide-react";
+import { CheckCircle, ArrowLeft, ArrowRight } from "lucide-react";
 import FadeIn from "@/components/animations/FadeIn";
 import Button from "@/components/ui/Button";
 import CTA from "@/components/sections/CTA";
-import { services } from "@/lib/data";
-
-const iconMap: { [key: string]: React.ComponentType<{ size?: number; className?: string }> } = {
-  Calendar,
-  Speaker,
-  Palette,
-  Video,
-};
+import { serviceCategories } from "@/lib/data";
 
 interface ServicePageProps {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  return services.map((service) => ({
-    slug: service.id,
+  return serviceCategories.map((category) => ({
+    slug: category.slug,
   }));
 }
 
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const service = services.find((s) => s.id === slug);
+  const category = serviceCategories.find((c) => c.slug === slug);
 
-  if (!service) {
-    return {
-      title: "Service Not Found",
-    };
+  if (!category) {
+    return { title: "Service Not Found" };
   }
 
   return {
-    title: service.title,
-    description: service.description,
+    title: category.title,
+    description: category.description,
   };
 }
 
-export default async function ServicePage({ params }: ServicePageProps) {
+export default async function ServiceCategoryPage({ params }: ServicePageProps) {
   const { slug } = await params;
-  const service = services.find((s) => s.id === slug);
+  const category = serviceCategories.find((c) => c.slug === slug);
 
-  if (!service) {
+  if (!category) {
     notFound();
   }
 
-  const Icon = iconMap[service.icon];
-  const otherServices = services.filter((s) => s.id !== slug);
+  const otherCategories = serviceCategories.filter((c) => c.slug !== slug);
 
   return (
     <>
@@ -63,40 +53,39 @@ export default async function ServicePage({ params }: ServicePageProps) {
               className="inline-flex items-center gap-2 text-[var(--foreground-muted)] hover:text-white transition-colors mb-8"
             >
               <ArrowLeft size={18} />
-              Back to Services
+              All Services
             </Link>
           </FadeIn>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <FadeIn delay={0.1}>
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-16 h-16 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center">
-                    {Icon && <Icon size={32} className="text-[var(--accent)]" />}
-                  </div>
-                </div>
+                <span className="text-[var(--accent)] text-sm font-semibold tracking-wider uppercase">
+                  {category.subtitle}
+                </span>
               </FadeIn>
               <FadeIn delay={0.2}>
-                <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                  {service.title}
+                <h1 className="text-4xl md:text-5xl font-bold text-white mt-3 mb-6">
+                  {category.title}
                 </h1>
               </FadeIn>
               <FadeIn delay={0.3}>
                 <p className="text-[var(--foreground-muted)] text-lg leading-relaxed mb-8">
-                  {service.description}
+                  {category.description}
                 </p>
               </FadeIn>
               <FadeIn delay={0.4}>
                 <Button href="/contact" variant="primary" size="lg">
-                  Request a Quote
+                  Discuss Your Project
+                  <ArrowRight size={18} className="ml-2" />
                 </Button>
               </FadeIn>
             </div>
             <FadeIn delay={0.3} direction="left">
               <div className="relative aspect-square rounded-xl overflow-hidden">
                 <Image
-                  src={service.image}
-                  alt={service.title}
+                  src={category.image}
+                  alt={category.title}
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -108,7 +97,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </div>
       </section>
 
-      {/* Features */}
+      {/* Services in this Category */}
       <section className="py-24 bg-[var(--background-secondary)]">
         <div className="max-w-7xl mx-auto px-6">
           <FadeIn>
@@ -116,23 +105,26 @@ export default async function ServicePage({ params }: ServicePageProps) {
               What&apos;s Included
             </h2>
           </FadeIn>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {service.features.map((feature, index) => (
-              <FadeIn key={feature} delay={index * 0.1}>
-                <div className="p-6 bg-black rounded-xl border border-white/5">
-                  <div className="flex items-start gap-4">
-                    <div className="mt-1">
-                      <CheckCircle size={20} className="text-[var(--accent)]" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-white mb-2">
-                        {feature}
-                      </h3>
-                      <p className="text-[var(--foreground-muted)] text-sm">
-                        Professional {feature.toLowerCase()} services tailored to
-                        your specific event requirements.
-                      </p>
-                    </div>
+          <div className="space-y-8">
+            {category.services.map((service, index) => (
+              <FadeIn key={service.id} delay={index * 0.1}>
+                <div className="p-8 bg-black/30 rounded-xl border border-white/5">
+                  <h3 className="text-xl font-bold text-white mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-[var(--foreground-muted)] text-lg mb-6 leading-relaxed">
+                    {service.description}
+                  </p>
+                  <div className="grid md:grid-cols-2 gap-3">
+                    {service.features.map((feature) => (
+                      <div
+                        key={feature}
+                        className="flex items-center gap-3 text-white"
+                      >
+                        <CheckCircle size={18} className="text-[var(--accent)] flex-shrink-0" />
+                        <span className="text-sm">{feature}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </FadeIn>
@@ -141,7 +133,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </div>
       </section>
 
-      {/* Other Services */}
+      {/* Other Categories */}
       <section className="py-24 bg-background">
         <div className="max-w-7xl mx-auto px-6">
           <FadeIn>
@@ -150,33 +142,27 @@ export default async function ServicePage({ params }: ServicePageProps) {
             </h2>
           </FadeIn>
           <div className="grid md:grid-cols-3 gap-6">
-            {otherServices.map((otherService, index) => {
-              const OtherIcon = iconMap[otherService.icon];
-              return (
-                <FadeIn key={otherService.id} delay={index * 0.1}>
-                  <Link href={`/services/${otherService.id}`}>
-                    <div className="group p-6 bg-[var(--background-secondary)] rounded-xl border border-white/5 hover:border-[var(--accent)]/30 transition-all">
-                      <div className="w-12 h-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4 group-hover:bg-[var(--accent)]/20 transition-colors">
-                        {OtherIcon && (
-                          <OtherIcon size={24} className="text-[var(--accent)]" />
-                        )}
-                      </div>
-                      <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[var(--accent)] transition-colors">
-                        {otherService.title}
-                      </h3>
-                      <p className="text-[var(--foreground-muted)] text-sm">
-                        {otherService.shortDescription}
-                      </p>
-                    </div>
-                  </Link>
-                </FadeIn>
-              );
-            })}
+            {otherCategories.map((other, index) => (
+              <FadeIn key={other.id} delay={index * 0.1}>
+                <Link href={`/services/${other.slug}`}>
+                  <div className="group p-6 bg-[var(--background-secondary)] rounded-xl border border-white/5 hover:border-[var(--accent)]/30 transition-all">
+                    <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-[var(--accent)] transition-colors">
+                      {other.title}
+                    </h3>
+                    <p className="text-[var(--accent)] text-xs font-medium mb-3">
+                      {other.subtitle}
+                    </p>
+                    <p className="text-[var(--foreground-muted)] text-sm line-clamp-3">
+                      {other.description}
+                    </p>
+                  </div>
+                </Link>
+              </FadeIn>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
       <CTA />
     </>
   );

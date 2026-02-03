@@ -6,7 +6,6 @@ import { siteConfig } from "@/lib/data";
 export default function CustomSolutions() {
   return (
     <section className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%)' }}>
-      {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div
           className="absolute inset-0"
@@ -21,15 +20,15 @@ export default function CustomSolutions() {
         <div className="text-center">
           <FadeIn>
             <span className="text-white/80 text-sm font-semibold tracking-[0.3em] uppercase mb-6 inline-block">
-              Custom Solutions
+              Your Strategic Production Partner
             </span>
           </FadeIn>
 
           <FadeIn delay={0.1}>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight max-w-4xl mx-auto">
-              WHERE CREATIVITY MEETS
+              THE SCALE OF A GLOBAL AGENCY.
               <br />
-              FLAWLESS EXECUTION
+              THE ATTENTION OF A DEDICATED PARTNER.
             </h2>
           </FadeIn>
 

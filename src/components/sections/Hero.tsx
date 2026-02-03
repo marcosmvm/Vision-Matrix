@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { siteConfig } from "@/lib/data";
+import Button from "@/components/ui/Button";
 
 export default function Hero() {
   return (
@@ -37,6 +39,19 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 text-center pt-20">
+        {/* Experience Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/5 mb-8"
+        >
+          <div className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
+          <span className="text-[var(--accent)] text-sm font-medium tracking-wide">
+            20+ Years of Event Excellence
+          </span>
+        </motion.div>
+
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -50,10 +65,26 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-lg md:text-xl lg:text-2xl text-white/80 font-medium tracking-widest uppercase max-w-3xl mx-auto"
+          className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-10"
         >
           {siteConfig.subtitle}
         </motion.p>
+
+        {/* Dual CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center"
+        >
+          <Button href="/contact" variant="primary" size="lg">
+            Start Your Project
+            <ArrowRight size={18} className="ml-2" />
+          </Button>
+          <Button href="/case-studies" variant="secondary" size="lg">
+            View Our Work
+          </Button>
+        </motion.div>
       </div>
 
       {/* Gradient Fade at Bottom */}

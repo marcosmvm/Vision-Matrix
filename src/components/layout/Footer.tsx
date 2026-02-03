@@ -2,14 +2,15 @@
 
 import Link from "next/link";
 import { Instagram, Linkedin, Facebook, Phone, MapPin } from "lucide-react";
-import { siteConfig, navLinks } from "@/lib/data";
+import { siteConfig } from "@/lib/data";
 import Logo from "@/components/ui/Logo";
 
 export default function Footer() {
   const footerNavLinks = [
     { name: "About", href: "/about" },
     { name: "Services", href: "/services" },
-    { name: "Event Gallery", href: "/event-gallery" },
+    { name: "Case Studies", href: "/case-studies" },
+    { name: "Insights", href: "/insights" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -19,13 +20,13 @@ export default function Footer() {
       <div className="border-t border-white/10 py-20">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <p className="text-white/80 text-lg tracking-wider uppercase mb-6">
-            Event Production Services Worldwide
+            Strategic Event Production Worldwide
           </p>
           <Link
             href="/contact"
             className="inline-block px-10 py-4 border-2 border-white text-white font-semibold uppercase tracking-wider hover:bg-white hover:text-[#0a0a0f] transition-all duration-300"
           >
-            Get Started
+            Start a Conversation
           </Link>
         </div>
       </div>
@@ -38,7 +39,7 @@ export default function Footer() {
             <div className="flex flex-col items-center md:items-start">
               <Logo size="md" />
               <p className="text-[var(--foreground-muted)] text-sm mt-6">
-                © {new Date().getFullYear()} Vision Matrix
+                &copy; {new Date().getFullYear()} Vision Matrix
               </p>
             </div>
 
@@ -60,7 +61,6 @@ export default function Footer() {
 
             {/* Contact & Social */}
             <div className="flex flex-col items-center md:items-end gap-4">
-              {/* Contact Info */}
               <div className="flex flex-col items-center md:items-end gap-2 text-sm text-white/80">
                 <a
                   href={`tel:${siteConfig.contact.phone}`}
@@ -75,7 +75,6 @@ export default function Footer() {
                 </div>
               </div>
 
-              {/* Social Links */}
               <div className="flex gap-4 mt-2">
                 <a
                   href={siteConfig.social.instagram}

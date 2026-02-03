@@ -4,54 +4,12 @@ import FadeIn from "@/components/animations/FadeIn";
 import StaggerContainer, { StaggerItem } from "@/components/animations/StaggerContainer";
 import Stats from "@/components/sections/Stats";
 import CTA from "@/components/sections/CTA";
-import { siteConfig } from "@/lib/data";
+import { teamMembers, values } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "About Us",
-  description: "Learn about Vision Matrix Productions - nearly two decades of experience in premium event production.",
+  description: "Learn about Vision Matrix Productions - nearly two decades of experience in strategic event production for the world's leading brands.",
 };
-
-const values = [
-  {
-    title: "Excellence",
-    description: "We pursue excellence in every detail, ensuring each event exceeds expectations.",
-  },
-  {
-    title: "Creativity",
-    description: "We bring innovative ideas and fresh perspectives to every project we undertake.",
-  },
-  {
-    title: "Reliability",
-    description: "Our clients trust us because we deliver on our promises, every single time.",
-  },
-  {
-    title: "Partnership",
-    description: "We work as an extension of your team, invested in your event's success.",
-  },
-];
-
-const team = [
-  {
-    name: "David Chen",
-    role: "Founder & CEO",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400",
-  },
-  {
-    name: "Sarah Martinez",
-    role: "Creative Director",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
-  },
-  {
-    name: "Michael Thompson",
-    role: "Technical Director",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
-  },
-  {
-    name: "Emily Rodriguez",
-    role: "Head of Operations",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400",
-  },
-];
 
 export default function AboutPage() {
   return (
@@ -68,8 +26,8 @@ export default function AboutPage() {
               </FadeIn>
               <FadeIn delay={0.1}>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-4 mb-6">
-                  Crafting Extraordinary{" "}
-                  <span className="text-gradient">Experiences</span>
+                  The Team Behind{" "}
+                  <span className="text-gradient">the Vision</span>
                 </h1>
               </FadeIn>
               <FadeIn delay={0.2}>
@@ -148,7 +106,7 @@ export default function AboutPage() {
           <div className="text-center mb-16">
             <FadeIn>
               <span className="text-[var(--accent)] text-sm font-semibold tracking-wider uppercase">
-                Our Team
+                Our Leadership
               </span>
             </FadeIn>
             <FadeIn delay={0.1}>
@@ -158,15 +116,15 @@ export default function AboutPage() {
             </FadeIn>
             <FadeIn delay={0.2}>
               <p className="text-[var(--foreground-muted)] max-w-2xl mx-auto">
-                Our talented team brings diverse expertise and a shared passion
-                for creating unforgettable events.
+                Our leadership team brings decades of combined experience and a
+                shared commitment to delivering exceptional events.
               </p>
             </FadeIn>
           </div>
 
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.map((member) => (
-              <StaggerItem key={member.name}>
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {teamMembers.map((member) => (
+              <StaggerItem key={member.id}>
                 <div className="group text-center">
                   <div className="relative aspect-square rounded-xl overflow-hidden mb-4">
                     <Image
@@ -180,8 +138,11 @@ export default function AboutPage() {
                   <h3 className="text-lg font-semibold text-white">
                     {member.name}
                   </h3>
-                  <p className="text-[var(--foreground-muted)] text-sm">
+                  <p className="text-[var(--accent)] text-sm font-medium mb-2">
                     {member.role}
+                  </p>
+                  <p className="text-[var(--foreground-muted)] text-sm leading-relaxed">
+                    {member.fullBio}
                   </p>
                 </div>
               </StaggerItem>

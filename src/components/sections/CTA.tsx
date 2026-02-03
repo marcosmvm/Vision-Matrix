@@ -8,7 +8,6 @@ import Button from "@/components/ui/Button";
 export default function CTA() {
   return (
     <section className="py-24 bg-[var(--background-secondary)] relative overflow-hidden">
-      {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div
           className="absolute inset-0"
@@ -28,31 +27,31 @@ export default function CTA() {
 
         <FadeIn delay={0.1}>
           <h2 className="text-3xl md:text-5xl font-bold text-white mt-4 mb-6">
-            Let&apos;s Create Something{" "}
-            <span className="text-gradient">Extraordinary</span>
+            Ready to Elevate Your{" "}
+            <span className="text-gradient">Next Event?</span>
           </h2>
         </FadeIn>
 
         <FadeIn delay={0.2}>
           <p className="text-[var(--foreground-muted)] text-lg max-w-2xl mx-auto mb-10">
-            Whether you&apos;re planning a corporate conference, product launch, or
-            private celebration, our team is ready to bring your vision to life.
+            Partner with a team that delivers at scale — with the attention to
+            detail your brand deserves. From strategy through execution, we&apos;re
+            ready to bring your vision to life.
           </p>
         </FadeIn>
 
         <FadeIn delay={0.3}>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button href="/contact" variant="primary" size="lg">
-              Get in Touch
+              Start a Conversation
               <ArrowRight size={18} className="ml-2" />
             </Button>
-            <Button href="/portfolio" variant="secondary" size="lg">
-              Explore Our Work
+            <Button href="/case-studies" variant="secondary" size="lg">
+              View Case Studies
             </Button>
           </div>
         </FadeIn>
 
-        {/* Decorative Elements */}
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
           whileInView={{ opacity: 1, scale: 1 }}

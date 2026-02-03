@@ -2,10 +2,25 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  CheckCircle,
+  ArrowRight,
+  MessageSquare,
+  FileText,
+  Rocket,
+} from "lucide-react";
 import FadeIn from "@/components/animations/FadeIn";
 import Button from "@/components/ui/Button";
-import { siteConfig, services } from "@/lib/data";
+import {
+  siteConfig,
+  eventTypeOptions,
+  attendeeCountOptions,
+  timelineOptions,
+} from "@/lib/data";
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({
@@ -13,14 +28,18 @@ export default function ContactPage() {
     email: "",
     phone: "",
     company: "",
-    service: "",
+    eventType: "",
+    attendeeCount: "",
+    timeline: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target;
     setFormState((prev) => ({ ...prev, [name]: value }));
@@ -29,42 +48,46 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1500));
-
     setIsSubmitting(false);
     setIsSubmitted(true);
   };
 
+  const inputClasses =
+    "w-full px-4 py-3 bg-black border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-[var(--accent)] transition-colors";
+  const selectClasses =
+    "w-full px-4 py-3 bg-black border border-white/10 rounded-lg text-white focus:outline-none focus:border-[var(--accent)] transition-colors";
+
   return (
     <>
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="pt-32 pb-20 bg-background">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <FadeIn>
-              <span className="text-[var(--accent)] text-sm font-semibold tracking-wider uppercase">
-                Contact Us
+              <span className="text-[var(--accent)] text-sm font-semibold tracking-[0.3em] uppercase">
+                Start a Project
               </span>
             </FadeIn>
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-4 mb-6">
-                Let&apos;s Create Something{" "}
-                <span className="text-gradient">Amazing</span>
+                Let&apos;s Build Your{" "}
+                <span className="text-gradient">Vision</span>
               </h1>
             </FadeIn>
             <FadeIn delay={0.2}>
               <p className="text-[var(--foreground-muted)] text-lg max-w-2xl mx-auto">
-                Ready to bring your vision to life? Get in touch with our team to
-                discuss your next event.
+                Tell us about your event and we&apos;ll put together a
+                tailored approach. No commitment, no cookie-cutter proposals
+                — just a straightforward conversation about what you need.
               </p>
             </FadeIn>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-12">
-            {/* Contact Info */}
+            {/* Left Sidebar: Contact Info + Process */}
             <div className="lg:col-span-1 space-y-8">
+              {/* Contact Cards */}
               <FadeIn delay={0.3}>
                 <div className="p-6 bg-[var(--background-secondary)] rounded-xl border border-white/5">
                   <div className="flex items-start gap-4">
@@ -115,11 +138,71 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-white mb-1">
-                        Visit Us
+                        Location
                       </h3>
                       <p className="text-[var(--foreground-muted)]">
                         {siteConfig.contact.address}
                       </p>
+                    </div>
+                  </div>
+                </div>
+              </FadeIn>
+
+              {/* What to Expect */}
+              <FadeIn delay={0.6}>
+                <div className="p-6 bg-[var(--background-secondary)] rounded-xl border border-white/5">
+                  <h3 className="text-lg font-semibold text-white mb-5">
+                    What to Expect
+                  </h3>
+                  <div className="space-y-5">
+                    <div className="flex gap-4">
+                      <div className="w-10 h-10 rounded-full bg-[var(--accent)]/10 flex items-center justify-center flex-shrink-0">
+                        <MessageSquare
+                          size={18}
+                          className="text-[var(--accent)]"
+                        />
+                      </div>
+                      <div>
+                        <p className="text-white font-medium text-sm">
+                          Discovery Call
+                        </p>
+                        <p className="text-[var(--foreground-muted)] text-xs">
+                          We learn about your event, goals, and audience
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex gap-4">
+                      <div className="w-10 h-10 rounded-full bg-[var(--accent)]/10 flex items-center justify-center flex-shrink-0">
+                        <FileText
+                          size={18}
+                          className="text-[var(--accent)]"
+                        />
+                      </div>
+                      <div>
+                        <p className="text-white font-medium text-sm">
+                          Custom Proposal
+                        </p>
+                        <p className="text-[var(--foreground-muted)] text-xs">
+                          A tailored scope and investment breakdown
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex gap-4">
+                      <div className="w-10 h-10 rounded-full bg-[var(--accent)]/10 flex items-center justify-center flex-shrink-0">
+                        <Rocket
+                          size={18}
+                          className="text-[var(--accent)]"
+                        />
+                      </div>
+                      <div>
+                        <p className="text-white font-medium text-sm">
+                          Kickoff
+                        </p>
+                        <p className="text-[var(--foreground-muted)] text-xs">
+                          Your dedicated team begins bringing your vision to
+                          life
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -139,11 +222,21 @@ export default function ContactPage() {
                       <CheckCircle size={32} className="text-green-500" />
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-4">
-                      Message Sent!
+                      Thank You!
                     </h3>
-                    <p className="text-[var(--foreground-muted)] mb-6">
-                      Thank you for reaching out. Our team will get back to you
-                      within 24 hours.
+                    <p className="text-[var(--foreground-muted)] mb-2">
+                      We&apos;ve received your inquiry and will be in touch
+                      within one business day.
+                    </p>
+                    <p className="text-[var(--foreground-muted)] text-sm mb-6">
+                      In the meantime, explore our{" "}
+                      <a
+                        href="/case-studies"
+                        className="text-[var(--accent)] hover:underline"
+                      >
+                        case studies
+                      </a>{" "}
+                      to see our work in action.
                     </p>
                     <Button
                       onClick={() => {
@@ -153,13 +246,15 @@ export default function ContactPage() {
                           email: "",
                           phone: "",
                           company: "",
-                          service: "",
+                          eventType: "",
+                          attendeeCount: "",
+                          timeline: "",
                           message: "",
                         });
                       }}
                       variant="secondary"
                     >
-                      Send Another Message
+                      Submit Another Inquiry
                     </Button>
                   </motion.div>
                 ) : (
@@ -179,8 +274,8 @@ export default function ContactPage() {
                           required
                           value={formState.name}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 bg-black border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-[var(--accent)] transition-colors"
-                          placeholder="John Doe"
+                          className={inputClasses}
+                          placeholder="Your name"
                         />
                       </div>
                       <div>
@@ -197,8 +292,8 @@ export default function ContactPage() {
                           required
                           value={formState.email}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 bg-black border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-[var(--accent)] transition-colors"
-                          placeholder="john@example.com"
+                          className={inputClasses}
+                          placeholder="you@company.com"
                         />
                       </div>
                     </div>
@@ -217,7 +312,7 @@ export default function ContactPage() {
                           name="phone"
                           value={formState.phone}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 bg-black border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-[var(--accent)] transition-colors"
+                          className={inputClasses}
                           placeholder="(555) 123-4567"
                         />
                       </div>
@@ -226,42 +321,88 @@ export default function ContactPage() {
                           htmlFor="company"
                           className="block text-sm font-medium text-white mb-2"
                         >
-                          Company
+                          Company / Organization *
                         </label>
                         <input
                           type="text"
                           id="company"
                           name="company"
+                          required
                           value={formState.company}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 bg-black border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-[var(--accent)] transition-colors"
-                          placeholder="Your Company"
+                          className={inputClasses}
+                          placeholder="Your company"
                         />
                       </div>
                     </div>
 
-                    <div>
-                      <label
-                        htmlFor="service"
-                        className="block text-sm font-medium text-white mb-2"
-                      >
-                        Service Interested In
-                      </label>
-                      <select
-                        id="service"
-                        name="service"
-                        value={formState.service}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 bg-black border border-white/10 rounded-lg text-white focus:outline-none focus:border-[var(--accent)] transition-colors"
-                      >
-                        <option value="">Select a service...</option>
-                        {services.map((service) => (
-                          <option key={service.id} value={service.id}>
-                            {service.title}
-                          </option>
-                        ))}
-                        <option value="other">Other</option>
-                      </select>
+                    <div className="grid md:grid-cols-3 gap-6">
+                      <div>
+                        <label
+                          htmlFor="eventType"
+                          className="block text-sm font-medium text-white mb-2"
+                        >
+                          Event Type
+                        </label>
+                        <select
+                          id="eventType"
+                          name="eventType"
+                          value={formState.eventType}
+                          onChange={handleChange}
+                          className={selectClasses}
+                        >
+                          <option value="">Select type...</option>
+                          {eventTypeOptions.map((opt) => (
+                            <option key={opt} value={opt}>
+                              {opt}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="attendeeCount"
+                          className="block text-sm font-medium text-white mb-2"
+                        >
+                          Expected Attendees
+                        </label>
+                        <select
+                          id="attendeeCount"
+                          name="attendeeCount"
+                          value={formState.attendeeCount}
+                          onChange={handleChange}
+                          className={selectClasses}
+                        >
+                          <option value="">Select range...</option>
+                          {attendeeCountOptions.map((opt) => (
+                            <option key={opt} value={opt}>
+                              {opt}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="timeline"
+                          className="block text-sm font-medium text-white mb-2"
+                        >
+                          Timeline
+                        </label>
+                        <select
+                          id="timeline"
+                          name="timeline"
+                          value={formState.timeline}
+                          onChange={handleChange}
+                          className={selectClasses}
+                        >
+                          <option value="">Select timeline...</option>
+                          {timelineOptions.map((opt) => (
+                            <option key={opt} value={opt}>
+                              {opt}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
                     </div>
 
                     <div>
@@ -269,7 +410,7 @@ export default function ContactPage() {
                         htmlFor="message"
                         className="block text-sm font-medium text-white mb-2"
                       >
-                        Message *
+                        Tell Us About Your Event *
                       </label>
                       <textarea
                         id="message"
@@ -278,8 +419,8 @@ export default function ContactPage() {
                         rows={5}
                         value={formState.message}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 bg-black border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-[var(--accent)] transition-colors resize-none"
-                        placeholder="Tell us about your event..."
+                        className={`${inputClasses} resize-none`}
+                        placeholder="Share your vision — what are you looking to achieve, and how can we help?"
                       />
                     </div>
 
@@ -294,7 +435,11 @@ export default function ContactPage() {
                         <span className="flex items-center gap-2">
                           <motion.span
                             animate={{ rotate: 360 }}
-                            transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                            transition={{
+                              repeat: Infinity,
+                              duration: 1,
+                              ease: "linear",
+                            }}
                             className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full"
                           />
                           Sending...
@@ -302,7 +447,7 @@ export default function ContactPage() {
                       ) : (
                         <span className="flex items-center gap-2">
                           <Send size={18} />
-                          Send Message
+                          Submit Inquiry
                         </span>
                       )}
                     </Button>
