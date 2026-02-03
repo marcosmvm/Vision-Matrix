@@ -21,6 +21,12 @@ export interface ServiceCategoryGroup {
   services: ServiceItem[];
 }
 
+export interface GalleryImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
 export interface CaseStudy {
   id: string;
   slug: string;
@@ -33,6 +39,8 @@ export interface CaseStudy {
   outcome: string;
   quote?: { text: string; author: string; title: string };
   image: string;
+  gallery?: GalleryImage[];
+  videoUrl?: string;
   stats: Record<string, string>;
   category: string;
   featured: boolean;

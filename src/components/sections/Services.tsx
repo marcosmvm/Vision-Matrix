@@ -33,6 +33,7 @@ export default function Services() {
                       src={category.image}
                       alt={category.title}
                       fill
+                      sizes="(max-width: 768px) 100vw, 25vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-blue-900/80 via-blue-800/85 to-blue-700/90 group-hover:from-blue-800/85 group-hover:via-blue-700/90 group-hover:to-blue-600/95 transition-all duration-500" />

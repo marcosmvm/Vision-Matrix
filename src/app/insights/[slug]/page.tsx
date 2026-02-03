@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Clock, User } from "lucide-react";
 import FadeIn from "@/components/animations/FadeIn";
+import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { insightArticles } from "@/lib/data";
 
 export function generateStaticParams() {
@@ -17,9 +18,29 @@ export async function generateMetadata({
   const { slug } = await params;
   const article = insightArticles.find((a) => a.slug === slug);
   if (!article) return { title: "Article Not Found" };
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "";
   return {
     title: `${article.title} | Vision Matrix Insights`,
     description: article.excerpt,
+    alternates: {
+      canonical: `${siteUrl}/insights/${slug}`,
+    },
+    openGraph: {
+      title: article.title,
+      description: article.excerpt,
+      url: `${siteUrl}/insights/${slug}`,
+      siteName: "Vision Matrix",
+      images: [{ url: article.image, width: 800, height: 600, alt: article.title }],
+      type: "article",
+      publishedTime: article.publishDate,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.excerpt,
+      images: [article.image],
+    },
   };
 }
 
@@ -38,6 +59,21 @@ export default async function InsightArticlePage({
 
   return (
     <>
+      <ArticleJsonLd
+        title={article.title}
+        description={article.excerpt}
+        image={article.image}
+        publishDate={article.publishDate}
+        url={`/insights/${article.slug}`}
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "/" },
+          { name: "Insights", url: "/insights" },
+          { name: article.title, url: `/insights/${article.slug}` },
+        ]}
+      />
+
       {/* Hero */}
       <section className="relative pt-32 pb-20">
         <div className="absolute inset-0">
@@ -45,6 +81,7 @@ export default async function InsightArticlePage({
             src={article.image}
             alt={article.title}
             fill
+            sizes="100vw"
             className="object-cover"
             priority
           />
@@ -145,6 +182,7 @@ export default async function InsightArticlePage({
                           src={related.image}
                           alt={related.title}
                           fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
                           className="object-cover transition-transform duration-700 group-hover:scale-105"
                         />
                       </div>

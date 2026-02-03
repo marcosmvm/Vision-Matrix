@@ -6,6 +6,8 @@ import FadeIn from "@/components/animations/FadeIn";
 import StaggerContainer, {
   StaggerItem,
 } from "@/components/animations/StaggerContainer";
+import ImageGallery from "@/components/ui/ImageGallery";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { caseStudies } from "@/lib/data";
 
 export function generateStaticParams() {
@@ -20,9 +22,32 @@ export async function generateMetadata({
   const { slug } = await params;
   const study = caseStudies.find((cs) => cs.slug === slug);
   if (!study) return { title: "Case Study Not Found" };
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "";
+  const description = study.challenge.length > 155
+    ? study.challenge.substring(0, 152) + "..."
+    : study.challenge;
+
   return {
-    title: `${study.title} | Vision Matrix`,
-    description: study.challenge,
+    title: `${study.title} - ${study.client} | Vision Matrix`,
+    description,
+    alternates: {
+      canonical: `${siteUrl}/case-studies/${slug}`,
+    },
+    openGraph: {
+      title: `${study.title} | Vision Matrix`,
+      description,
+      url: `${siteUrl}/case-studies/${slug}`,
+      siteName: "Vision Matrix",
+      images: [{ url: study.image, width: 800, height: 600, alt: study.title }],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${study.title} | Vision Matrix`,
+      description,
+      images: [study.image],
+    },
   };
 }
 
@@ -41,6 +66,14 @@ export default async function CaseStudyPage({
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "/" },
+          { name: "Case Studies", url: "/case-studies" },
+          { name: study.title, url: `/case-studies/${study.slug}` },
+        ]}
+      />
+
       {/* Hero */}
       <section className="relative pt-32 pb-20">
         <div className="absolute inset-0">
@@ -48,6 +81,7 @@ export default async function CaseStudyPage({
             src={study.image}
             alt={study.title}
             fill
+            sizes="100vw"
             className="object-cover"
             priority
           />
@@ -149,6 +183,25 @@ export default async function CaseStudyPage({
         </div>
       </section>
 
+      {/* Gallery */}
+      {study.gallery && study.gallery.length > 0 && (
+        <section className="py-24 bg-[var(--background-secondary)]">
+          <div className="max-w-7xl mx-auto px-6">
+            <FadeIn>
+              <span className="text-[var(--accent)] text-sm font-semibold tracking-[0.3em] uppercase block mb-4 text-center">
+                Event Gallery
+              </span>
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-10 text-center">
+                Behind the Production
+              </h2>
+            </FadeIn>
+            <FadeIn delay={0.2}>
+              <ImageGallery images={study.gallery} columns={study.gallery.length <= 2 ? 2 : 3} />
+            </FadeIn>
+          </div>
+        </section>
+      )}
+
       {/* Client Quote */}
       {study.quote && (
         <section className="py-20 bg-[var(--background-secondary)]">
@@ -197,6 +250,7 @@ export default async function CaseStudyPage({
                           src={related.image}
                           alt={related.title}
                           fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
                           className="object-cover transition-transform duration-700 group-hover:scale-110"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />

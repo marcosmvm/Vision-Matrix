@@ -1,49 +1,32 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, CheckCircle } from "lucide-react";
+import { Send, CheckCircle, AlertCircle, X } from "lucide-react";
 import FadeIn from "@/components/animations/FadeIn";
 import {
   eventTypeOptions,
   attendeeCountOptions,
   timelineOptions,
 } from "@/lib/data";
+import { useContactForm } from "@/hooks/useContactForm";
 
 export default function ContactForm() {
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    company: "",
-    eventType: "",
-    attendeeCount: "",
-    timeline: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value } = e.target;
-    setFormState((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-  };
+  const {
+    register,
+    handleSubmit,
+    errors,
+    isSubmitting,
+    isSubmitted,
+    serverError,
+    setServerError,
+    resetForm,
+  } = useContactForm();
 
   const inputClasses =
     "w-full px-4 py-3 bg-[var(--background-secondary)] border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-[var(--accent)] transition-colors";
   const selectClasses =
     "w-full px-4 py-3 bg-[var(--background-secondary)] border border-white/10 rounded-lg text-white focus:outline-none focus:border-[var(--accent)] transition-colors";
+  const errorClasses = "text-red-400 text-xs mt-1";
 
   return (
     <section className="py-24 bg-background">
@@ -85,18 +68,7 @@ export default function ContactForm() {
                 one business day.
               </p>
               <button
-                onClick={() => {
-                  setIsSubmitted(false);
-                  setFormState({
-                    name: "",
-                    email: "",
-                    company: "",
-                    eventType: "",
-                    attendeeCount: "",
-                    timeline: "",
-                    message: "",
-                  });
-                }}
+                onClick={resetForm}
                 className="px-6 py-3 border border-white/20 text-white hover:bg-white/10 transition-colors rounded-lg"
               >
                 Submit Another Inquiry
@@ -107,48 +79,83 @@ export default function ContactForm() {
               onSubmit={handleSubmit}
               className="space-y-6 max-w-4xl mx-auto"
             >
-              <div className="grid md:grid-cols-3 gap-6">
-                <div>
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    value={formState.name}
-                    onChange={handleChange}
-                    placeholder="Name *"
-                    className={inputClasses}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    value={formState.email}
-                    onChange={handleChange}
-                    placeholder="Email *"
-                    className={inputClasses}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    name="company"
-                    required
-                    value={formState.company}
-                    onChange={handleChange}
-                    placeholder="Company *"
-                    className={inputClasses}
-                  />
-                </div>
+              {/* Server Error Banner */}
+              {serverError && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/20 rounded-lg"
+                >
+                  <AlertCircle size={20} className="text-red-400 flex-shrink-0" />
+                  <p className="text-red-400 text-sm flex-1">{serverError}</p>
+                  <button
+                    type="button"
+                    onClick={() => setServerError(null)}
+                    className="text-red-400 hover:text-red-300"
+                  >
+                    <X size={16} />
+                  </button>
+                </motion.div>
+              )}
+
+              {/* Honeypot - hidden from real users */}
+              <div className="absolute opacity-0 pointer-events-none" aria-hidden="true" tabIndex={-1}>
+                <input
+                  type="text"
+                  {...register("website" as never)}
+                  autoComplete="off"
+                  tabIndex={-1}
+                />
               </div>
 
               <div className="grid md:grid-cols-3 gap-6">
                 <div>
+                  <input
+                    type="text"
+                    {...register("name")}
+                    placeholder="Name *"
+                    className={`${inputClasses} ${errors.name ? "border-red-400/50" : ""}`}
+                  />
+                  {errors.name && (
+                    <p className={errorClasses}>{errors.name.message}</p>
+                  )}
+                </div>
+                <div>
+                  <input
+                    type="email"
+                    {...register("email")}
+                    placeholder="Email *"
+                    className={`${inputClasses} ${errors.email ? "border-red-400/50" : ""}`}
+                  />
+                  {errors.email && (
+                    <p className={errorClasses}>{errors.email.message}</p>
+                  )}
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    {...register("company")}
+                    placeholder="Company *"
+                    className={`${inputClasses} ${errors.company ? "border-red-400/50" : ""}`}
+                  />
+                  {errors.company && (
+                    <p className={errorClasses}>{errors.company.message}</p>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-4 gap-6">
+                <div>
+                  <input
+                    type="tel"
+                    {...register("phone")}
+                    placeholder="Phone"
+                    className={inputClasses}
+                  />
+                </div>
+                <div>
                   <select
-                    name="eventType"
-                    value={formState.eventType}
-                    onChange={handleChange}
+                    {...register("eventType")}
                     className={selectClasses}
                   >
                     <option value="">Event Type</option>
@@ -161,9 +168,7 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <select
-                    name="attendeeCount"
-                    value={formState.attendeeCount}
-                    onChange={handleChange}
+                    {...register("attendeeCount")}
                     className={selectClasses}
                   >
                     <option value="">Expected Attendees</option>
@@ -176,9 +181,7 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <select
-                    name="timeline"
-                    value={formState.timeline}
-                    onChange={handleChange}
+                    {...register("timeline")}
                     className={selectClasses}
                   >
                     <option value="">Timeline</option>
@@ -193,14 +196,14 @@ export default function ContactForm() {
 
               <div>
                 <textarea
-                  name="message"
-                  required
+                  {...register("message")}
                   rows={4}
-                  value={formState.message}
-                  onChange={handleChange}
                   placeholder="Tell us about your event... *"
-                  className={`${inputClasses} resize-none leading-relaxed`}
+                  className={`${inputClasses} resize-none leading-relaxed ${errors.message ? "border-red-400/50" : ""}`}
                 />
+                {errors.message && (
+                  <p className={errorClasses}>{errors.message.message}</p>
+                )}
               </div>
 
               <div className="text-center pt-4">

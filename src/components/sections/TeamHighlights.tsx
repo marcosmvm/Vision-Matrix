@@ -34,6 +34,7 @@ export default function TeamHighlights() {
                     src={member.image}
                     alt={member.name}
                     fill
+                    sizes="128px"
                     className="object-cover"
                   />
                 </div>

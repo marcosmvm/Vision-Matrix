@@ -4,38 +4,54 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { siteConfig } from "@/lib/data";
 import Button from "@/components/ui/Button";
+import VideoBackground from "@/components/ui/VideoBackground";
+
+// Set to a video path (e.g. "/videos/hero-reel.mp4") when video content is ready
+const HERO_VIDEO_SRC = "";
+const HERO_VIDEO_POSTER = "";
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[var(--background)]">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-20">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)`,
-            backgroundSize: "40px 40px",
-          }}
+      {HERO_VIDEO_SRC ? (
+        <VideoBackground
+          src={HERO_VIDEO_SRC}
+          poster={HERO_VIDEO_POSTER}
+          overlay
+          showControls
         />
-      </div>
+      ) : (
+        <>
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-20">
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)`,
+                backgroundSize: "40px 40px",
+              }}
+            />
+          </div>
 
-      {/* VM Watermark */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className="text-[40vw] font-black leading-none tracking-tighter"
-          style={{
-            background: "linear-gradient(180deg, rgba(79, 172, 254, 0.08) 0%, rgba(0, 242, 254, 0.03) 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
-        >
-          VM
-        </motion.div>
-      </div>
+          {/* VM Watermark */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
+              className="text-[40vw] font-black leading-none tracking-tighter"
+              style={{
+                background: "linear-gradient(180deg, rgba(79, 172, 254, 0.08) 0%, rgba(0, 242, 254, 0.03) 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              VM
+            </motion.div>
+          </div>
+        </>
+      )}
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 text-center pt-20">

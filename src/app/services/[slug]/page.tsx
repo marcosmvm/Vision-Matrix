@@ -26,9 +26,27 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
     return { title: "Service Not Found" };
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "";
   return {
-    title: category.title,
+    title: `${category.title} | Vision Matrix Services`,
     description: category.description,
+    alternates: {
+      canonical: `${siteUrl}/services/${slug}`,
+    },
+    openGraph: {
+      title: `${category.title} | Vision Matrix`,
+      description: category.description,
+      url: `${siteUrl}/services/${slug}`,
+      siteName: "Vision Matrix",
+      images: [{ url: category.image, width: 800, height: 600, alt: category.title }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${category.title} | Vision Matrix`,
+      description: category.description,
+      images: [category.image],
+    },
   };
 }
 

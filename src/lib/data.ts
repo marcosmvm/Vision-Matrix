@@ -2,6 +2,7 @@ import type {
   NavLink,
   ServiceCategoryGroup,
   CaseStudy,
+  GalleryImage,
   InsightArticle,
   TeamMember,
   Testimonial,
@@ -320,6 +321,12 @@ export const caseStudies: CaseStudy[] = [
       title: "Conference Producer",
     },
     image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800",
+    gallery: [
+      { src: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800", alt: "SCALE Global Summit main stage", caption: "Main stage keynote presentation" },
+      { src: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800", alt: "Summit networking area", caption: "Attendee networking sessions" },
+      { src: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800", alt: "Summit panel discussion", caption: "Industry leader panel discussion" },
+      { src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800", alt: "Summit exhibition hall", caption: "Exhibition and sponsor showcase" },
+    ],
     stats: { attendees: "5,000+", days: "3", speakers: "100+" },
     category: "conference",
     featured: true,
@@ -348,6 +355,11 @@ export const caseStudies: CaseStudy[] = [
       title: "Event Director, Milken Institute",
     },
     image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=800",
+    gallery: [
+      { src: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=800", alt: "Milken Health Summit stage", caption: "Opening keynote address" },
+      { src: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800", alt: "Health policy panel", caption: "Health policy expert panel" },
+      { src: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800", alt: "VIP reception area", caption: "Executive networking reception" },
+    ],
     stats: { attendees: "2,500+", days: "2", speakers: "50+" },
     category: "summit",
     featured: true,
@@ -376,6 +388,11 @@ export const caseStudies: CaseStudy[] = [
       title: "Executive Director, Conrad N. Hilton Foundation",
     },
     image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800",
+    gallery: [
+      { src: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800", alt: "Charity gala venue", caption: "Grand ballroom setting" },
+      { src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800", alt: "Gala stage design", caption: "Custom stage and lighting design" },
+      { src: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800", alt: "Live entertainment", caption: "Live musical performance" },
+    ],
     stats: { attendees: "800+", raised: "$2M+", performances: "5" },
     category: "gala",
     featured: true,
@@ -399,6 +416,11 @@ export const caseStudies: CaseStudy[] = [
     outcome:
       "Produced a product launch that generated 50+ press mentions, 15 live demonstrations, and became the most-shared event in the client's history.",
     image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800",
+    gallery: [
+      { src: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800", alt: "Product launch stage", caption: "Product reveal moment" },
+      { src: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800", alt: "Brand experience zone", caption: "Interactive demo stations" },
+      { src: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800", alt: "Media coverage", caption: "Press and media area" },
+    ],
     stats: { attendees: "1,200+", demos: "15", press: "50+" },
     category: "corporate",
     featured: false,
@@ -422,6 +444,11 @@ export const caseStudies: CaseStudy[] = [
     outcome:
       "Delivered a four-day activation that drove 10,000+ interactions and generated over 5 million social media impressions for the brand.",
     image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800",
+    gallery: [
+      { src: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800", alt: "Brand activation crowd", caption: "Festival crowd engagement" },
+      { src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800", alt: "Interactive installation", caption: "Interactive brand installation" },
+      { src: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800", alt: "Content capture", caption: "Social media content station" },
+    ],
     stats: { interactions: "10,000+", days: "4", impressions: "5M+" },
     category: "activation",
     featured: false,
